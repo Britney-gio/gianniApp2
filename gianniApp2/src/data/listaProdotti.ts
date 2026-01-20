@@ -8,7 +8,7 @@ export const listaProdotti: Prodotti[] = [
       "Limoni profumati e ricchi di succo, coltivati sotto il sole caldo della costa siracusana. Raccolti a mano e non trattati, ideali per cucina, dolci e bevande naturali.",
     origine: "Siracusa (SR)",
     prezzo: "0.001 ETH",
-    immagine: "../src/img/limone-sr.jpeg",
+    immagine: "../src/img/limone-sr.jpg",
   },
   {
     id: "2",
