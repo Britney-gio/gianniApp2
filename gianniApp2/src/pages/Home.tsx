@@ -94,6 +94,7 @@ export default function Home() {
                   <h3>{prodotto.nome}</h3>
                   <p>{prodotto.descrizione}</p>
                   <p>Origine: {prodotto.origine}</p>
+                  <p>Quantità: {prodotto.quantità}</p>
                   <p>
                     <strong>Prezzo al kg:</strong> {prodotto.prezzo}
                   </p>
@@ -117,7 +118,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/*FOOTER*/}
       <footer className="footer">
         <p>Grazie per aver scelto un'agricoltura sostenibile e trasparente.</p>
         <p>Lo staff dell'azienda agricola di Gianni</p>

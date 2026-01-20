@@ -20,10 +20,10 @@ export default function Checkout() {
   const { connectors, connect, isPending } = useConnect();
   const { disconnect } = useDisconnect();
 
-  // 👉 PRODOTTO
+  // PRODOTTO SCELTO
   const prodotto = location.state?.prodotto as Prodotti | undefined;
 
-  // 👉 BALANCE
+  // BALANCE WALLET CONNESSO
   const { data: balanceData, isLoading: isBalanceLoading } = useBalance({
     address,
     query: { enabled: Boolean(isConnected && address) },
@@ -33,8 +33,8 @@ export default function Checkout() {
     ? formatUnits(balanceData.value, balanceData.decimals)
     : null;
 
-  // 👉 TRANSAZIONE
-  const DESTINATARIO = "0x359CDd44E2a0dC045A8b0E62d2B0d685429EF894"; // ricevente
+  // TRANSAZIONE
+  const DESTINATARIO = "0x359CDd44E2a0dC045A8b0E62d2B0d685429EF894"; // GIANNI WALLET
   const PREZZO_ETH = "0.001"; // prezzo in ETH (Sepolia)
 
   const {
@@ -82,7 +82,7 @@ export default function Checkout() {
 
       <div className="checkout-wrapper">
         <section className="checkout-layout">
-          {/* SINISTRA — PRODOTTO */}
+          {/* COLONNA SINISTRA — PRODOTTO */}
           <div className="checkout-left prodotto-card">
             {!isConnected && (
               <div className="wallet-box">
@@ -105,19 +105,18 @@ export default function Checkout() {
             <h2>{prodotto.nome}</h2>
             <p>{prodotto.descrizione}</p>
             <p>Origine: {prodotto.origine}</p>
+            <p>Quantità: {prodotto.quantità}</p>
             <p>
-              <strong>Prezzo:</strong> {PREZZO_ETH} ETH
+              <strong>Prezzo al kg:</strong> {PREZZO_ETH} ETH
             </p>
           </div>
 
-          {/* DESTRA — WALLET */}
+          {/* COLONNA DESTRA — WALLET */}
           {isConnected && (
             <aside className="checkout-right wallet-info">
               <h3>Wallet connesso</h3>
 
-              <p className="address">
-                {address?.slice(0, 6)}…{address?.slice(-4)}
-              </p>
+              <p className="address">{address}</p>
 
               <p>
                 <strong>Saldo:</strong> {isBalanceLoading && "Caricamento..."}
@@ -151,9 +150,7 @@ export default function Checkout() {
 
                   <p className="tx-hash">
                     <strong>Tx hash:</strong>{" "}
-                    <span className="mono">
-                      {txHash.slice(0, 10)}…{txHash.slice(-8)}
-                    </span>
+                    <span className="mono">{txHash}</span>
                   </p>
 
                   <a

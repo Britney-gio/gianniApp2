@@ -183,7 +183,6 @@
   max-width: 320px;
 }
 
-/* rompe il container centrale SOLO per il checkout */
 .checkout-wrapper {
   width: 100vw;
   margin-left: calc(-50vw + 50%);
@@ -199,12 +198,10 @@
   justify-content: center;
 }
 
-/* colonna sinistra */
 .checkout-left {
   width: 360px;
 }
 
-/* aside destra */
 .checkout-right {
   width: 350px;
 
@@ -228,5 +225,5 @@
   word-break: break-all;
 }
 
-/* mobile */
+
 
