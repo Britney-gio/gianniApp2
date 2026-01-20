@@ -95,7 +95,7 @@ export default function Home() {
                   <p>{prodotto.descrizione}</p>
                   <p>Origine: {prodotto.origine}</p>
                   <p>
-                    <strong>Prezzo:</strong> {prodotto.prezzo}
+                    <strong>Prezzo al kg:</strong> {prodotto.prezzo}
                   </p>
                   <img src={prodotto.immagine} alt={prodotto.nome} />
                   <button

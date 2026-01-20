@@ -2,8 +2,15 @@ import { useLocation, Navigate, useNavigate } from "react-router-dom";
 import type { Prodotti } from "../types/prodotti";
 import "../styles/home.scss";
 
-import { useAccount, useConnect, useDisconnect, useBalance } from "wagmi";
-import { formatUnits } from "viem";
+import {
+  useAccount,
+  useConnect,
+  useDisconnect,
+  useBalance,
+  useSendTransaction,
+} from "wagmi";
+
+import { formatUnits, parseEther } from "viem";
 
 export default function Checkout() {
   const location = useLocation();
@@ -13,19 +20,46 @@ export default function Checkout() {
   const { connectors, connect, isPending } = useConnect();
   const { disconnect } = useDisconnect();
 
+  // 👉 PRODOTTO
   const prodotto = location.state?.prodotto as Prodotti | undefined;
 
+  // 👉 BALANCE
   const { data: balanceData, isLoading: isBalanceLoading } = useBalance({
     address,
-    query: {
-      enabled: Boolean(isConnected && address),
-    },
+    query: { enabled: Boolean(isConnected && address) },
   });
 
-  // ✅ QUI: definisci formattedBalance
   const formattedBalance = balanceData
     ? formatUnits(balanceData.value, balanceData.decimals)
     : null;
+
+  // 👉 TRANSAZIONE
+  const DESTINATARIO = "0x359CDd44E2a0dC045A8b0E62d2B0d685429EF894"; // ricevente
+  const PREZZO_ETH = "0.001"; // prezzo in ETH (Sepolia)
+
+  const {
+    sendTransaction,
+    data: txHash,
+    isPending: isTxPending,
+    isSuccess: isTxSuccess,
+    error: txError,
+  } = useSendTransaction();
+
+  const etherscanUrl = txHash
+    ? `https://sepolia.etherscan.io/tx/${txHash}`
+    : null;
+
+  const handleConfirmPurchase = () => {
+    if (!address) return;
+
+    sendTransaction({
+      to: DESTINATARIO,
+      value: parseEther(PREZZO_ETH),
+    });
+  };
+
+  const saldoSufficiente =
+    formattedBalance && Number(formattedBalance) >= Number(PREZZO_ETH);
 
   if (!prodotto) {
     return <Navigate to="/" replace />;
@@ -72,7 +106,7 @@ export default function Checkout() {
             <p>{prodotto.descrizione}</p>
             <p>Origine: {prodotto.origine}</p>
             <p>
-              <strong>Prezzo:</strong> {prodotto.prezzo}
+              <strong>Prezzo:</strong> {PREZZO_ETH} ETH
             </p>
           </div>
 
@@ -97,9 +131,43 @@ export default function Checkout() {
                   "Saldo non disponibile"}
               </p>
 
+              {!saldoSufficiente && (
+                <p className="error">Saldo insufficiente</p>
+              )}
+
               <button onClick={() => disconnect()}>Disconnetti</button>
 
-              <button className="confirm-button">Conferma acquisto</button>
+              <button
+                className="confirm-button"
+                onClick={handleConfirmPurchase}
+                disabled={isTxPending || !saldoSufficiente}
+              >
+                {isTxPending ? "Transazione in corso..." : "Conferma acquisto"}
+              </button>
+
+              {isTxSuccess && txHash && (
+                <div className="tx-info">
+                  <p className="success">Acquisto completato</p>
+
+                  <p className="tx-hash">
+                    <strong>Tx hash:</strong>{" "}
+                    <span className="mono">
+                      {txHash.slice(0, 10)}…{txHash.slice(-8)}
+                    </span>
+                  </p>
+
+                  <a
+                    href={etherscanUrl!}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="etherscan-link"
+                  >
+                    Vedi su Etherscan
+                  </a>
+                </div>
+              )}
+
+              {txError && <p className="error">Errore: {txError.message}</p>}
             </aside>
           )}
         </section>
@@ -108,9 +176,6 @@ export default function Checkout() {
       <footer className="footer">
         <p>Grazie per aver scelto un'agricoltura sostenibile e trasparente.</p>
         <p>Lo staff dell'azienda agricola di Gianni</p>
-
-        {/* meglio usare /img/... se l'immagine è in public */}
-        <img src="/img/img-footer.jpg" alt="campo Gianni vista Etna" />
       </footer>
     </main>
   );
