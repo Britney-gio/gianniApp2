@@ -11,7 +11,6 @@ export default function Checkout() {
     return <Navigate to="/" replace />;
   }
 
-  
   return (
     <main className="page">
       <header className="hero">
@@ -28,6 +27,8 @@ export default function Checkout() {
       </button>
 
       <section className="prodotto-card checkout-card">
+        <button>Connetti Metamask per confermare acquisto</button>
+
         <img src={prodotto.immagine} alt={prodotto.nome} />
         <h2>{prodotto.nome}</h2>
         <p>{prodotto.descrizione}</p>
@@ -35,10 +36,7 @@ export default function Checkout() {
         <p>
           <strong>Prezzo:</strong> {prodotto.prezzo}
         </p>
-        </section>
-
-
-        
+      </section>
 
       <footer className="footer">
         <p>Grazie per aver scelto un'agricoltura sostenibile e trasparente.</p>
