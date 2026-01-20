@@ -1,7 +1,9 @@
 import { useLocation, Navigate, useNavigate } from "react-router-dom";
 import type { Prodotti } from "../types/prodotti";
 import "../styles/home.scss";
+
 import { useAccount, useConnect, useDisconnect, useBalance } from "wagmi";
+import { formatUnits } from "viem";
 
 export default function Checkout() {
   const location = useLocation();
@@ -16,9 +18,14 @@ export default function Checkout() {
   const { data: balanceData, isLoading: isBalanceLoading } = useBalance({
     address,
     query: {
-      enabled: isConnected,
+      enabled: Boolean(isConnected && address),
     },
   });
+
+  // ✅ QUI: definisci formattedBalance
+  const formattedBalance = balanceData
+    ? formatUnits(balanceData.value, balanceData.decimals)
+    : null;
 
   if (!prodotto) {
     return <Navigate to="/" replace />;
@@ -39,7 +46,6 @@ export default function Checkout() {
         Home
       </button>
 
-      {/* wrapper full-width */}
       <div className="checkout-wrapper">
         <section className="checkout-layout">
           {/* SINISTRA — PRODOTTO */}
@@ -80,10 +86,15 @@ export default function Checkout() {
               </p>
 
               <p>
-                <strong>Saldo:</strong>{" "}
-                {isBalanceLoading
-                  ? "Caricamento..."
-                  : `${balanceData?.formatted} ${balanceData?.symbol}`}
+                <strong>Saldo:</strong> {isBalanceLoading && "Caricamento..."}
+                {!isBalanceLoading && formattedBalance && (
+                  <>
+                    {formattedBalance} {balanceData?.symbol}
+                  </>
+                )}
+                {!isBalanceLoading &&
+                  !formattedBalance &&
+                  "Saldo non disponibile"}
               </p>
 
               <button onClick={() => disconnect()}>Disconnetti</button>
@@ -97,7 +108,9 @@ export default function Checkout() {
       <footer className="footer">
         <p>Grazie per aver scelto un'agricoltura sostenibile e trasparente.</p>
         <p>Lo staff dell'azienda agricola di Gianni</p>
-        <img src="../src/img/img-footer.jpg" alt="campo Gianni vista Etna" />
+
+        {/* meglio usare /img/... se l'immagine è in public */}
+        <img src="/img/img-footer.jpg" alt="campo Gianni vista Etna" />
       </footer>
     </main>
   );
