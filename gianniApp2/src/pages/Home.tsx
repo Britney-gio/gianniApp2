@@ -121,7 +121,7 @@ export default function Home() {
       <footer className="footer">
         <p>Grazie per aver scelto un'agricoltura sostenibile e trasparente.</p>
         <p>Lo staff dell'azienda agricola di Gianni</p>
-        <img src="../src/img/img-footer.jpg" alt="campo Gianni vista Etna" />
+        <img src="/img-footer.jpg" alt="campo Gianni vista Etna" />
       </footer>
     </main>
   );

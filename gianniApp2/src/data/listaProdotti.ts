@@ -11,7 +11,7 @@ export const listaProdotti: Prodotti[] = [
     origine: "Siracusa (SR)",
     quantità: "1 kg",
     prezzo: "0.001 ETH",
-    immagine: "../src/img/limone-sr.jpg",
+    immagine: "/limone-sr.jpg",
   },
   {
     id: "2",
@@ -21,7 +21,7 @@ export const listaProdotti: Prodotti[] = [
     origine: "Catania (CT)",
     quantità: "1 kg",
     prezzo: "0.001 ETH",
-    immagine: "../src/img/arance-ct.jpeg",
+    immagine: "/arance-ct.jpeg",
   },
   {
     id: "3",
@@ -31,7 +31,7 @@ export const listaProdotti: Prodotti[] = [
     origine: "Etna (CT)",
     quantità: "1 kg",
     prezzo: "0.001 ETH",
-    immagine: "../src/img/fichi-ct.jpg",
+    immagine: "/fichi-ct.jpg",
   },
   {
     id: "4",
@@ -41,6 +41,6 @@ export const listaProdotti: Prodotti[] = [
     origine: "Avola (SR)",
     quantità: "1 kg",
     prezzo: "0.001 ETH",
-    immagine: "../src/img/mandorle-avola.jpg",
+    immagine: "/mandorle-avola.jpg",
   },
 ];
