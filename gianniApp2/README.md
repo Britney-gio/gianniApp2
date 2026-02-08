@@ -1,4 +1,5 @@
-# Progetto start2impact : E‑commerce Web3 di Gianni 
+# Progetto start2impact : E‑commerce Web3 di Gianni
+
 # https://gianni-appv2.vercel.app/
 
 Questo progetto è un semplice e‑commerce ambientato in Sicilia, dove i prodotti agricoli vengono acquistati tramite token sulla blockchain Ethereum (rete di test Sepolia). L’obiettivo è mostrare un flusso completo ma essenziale: scelta del prodotto, collegamento del wallet e simulazione pagamento.
@@ -30,9 +31,9 @@ Questo progetto è un semplice e‑commerce ambientato in Sicilia, dove i prodot
 ## Autore
 
 <p align="left">
-  <img src="./src/img/gn2.jpg" alt="Logo Giorgia Nieli" width="100" />
+<img src="./public/gn2.jpg" alt="Logo Giorgia Nieli" width="100" />
 </p>
 
-Sviluppato da **Giorgia Nieli**  
+Sviluppato da **Giorgia Nieli**
 
 - Email: [giorgianieli@gmail.com](mailto:giorgianieli@gmail.com)

@@ -106,7 +106,7 @@ export default function Home() {
                       })
                     }
                   >
-                    Procedi all acquisto
+                    Procedi all' acquisto
                   </button>
                 </li>
               ))}
