@@ -11,7 +11,6 @@ import {
   useBalance,
   useSendTransaction,
 } from "wagmi";
-
 import { formatUnits, parseEther } from "viem";
 
 const RECIPIENT_ADDRESS = "0x359CDd44E2a0dC045A8b0E62d2B0d685429EF894"; // GIANNI WALLET
@@ -25,7 +24,6 @@ export default function Checkout() {
   const { connectors, connect, isPending } = useConnect();
   const { disconnect } = useDisconnect();
 
-  // Per mostrare "(in corso...)" solo sul bottone cliccato
   const [selectedConnectorUid, setSelectedConnectorUid] = useState<
     string | null
   >(null);
@@ -49,18 +47,19 @@ export default function Checkout() {
   // TRANSAZIONE
   const {
     sendTransaction,
-    data: txHash,
+    data: txDataHash,
     isPending: isTxPending,
     isSuccess: isTxSuccess,
     error: txError,
   } = useSendTransaction();
 
-  const etherscanUrl = txHash
-    ? `https://sepolia.etherscan.io/tx/${txHash}`
+  const etherscanUrl = txDataHash
+    ? `https://sepolia.etherscan.io/tx/${txDataHash}`
     : null;
 
   const handleConfirmPurchase = () => {
     if (!address) return;
+    if (isTxPending || isTxSuccess) return;
 
     sendTransaction({
       to: RECIPIENT_ADDRESS,
@@ -91,6 +90,7 @@ export default function Checkout() {
         <p>Rivedi i dettagli e conferma il tuo ordine.</p>
       </header>
 
+      {/* (Opzionale) Questo bottone "Home" è ridondante perché c'è già in TopNav */}
       <button
         className="alert-button"
         type="button"
@@ -163,26 +163,34 @@ export default function Checkout() {
               <div className="wallet-actions">
                 <button onClick={() => disconnect()}>Disconnetti</button>
 
-                <button
-                  className="confirm-button"
-                  onClick={handleConfirmPurchase}
-                  disabled={isTxPending || !hasEnoughBalance || isTxSuccess}
-                >
-                  {isTxSuccess
-                    ? "Acquisto completato"
-                    : isTxPending
+                {!isTxSuccess ? (
+                  <button
+                    className="confirm-button"
+                    onClick={handleConfirmPurchase}
+                    disabled={isTxPending || !hasEnoughBalance}
+                  >
+                    {isTxPending
                       ? "Transazione in corso..."
                       : "Conferma acquisto"}
-                </button>
+                  </button>
+                ) : (
+                  <button
+                    className="confirm-button"
+                    type="button"
+                    onClick={() => navigate("/")}
+                  >
+                    Torna ai prodotti
+                  </button>
+                )}
               </div>
 
-              {isTxSuccess && txHash && (
+              {isTxSuccess && txDataHash && (
                 <div className="tx-info">
                   <p className="success">Acquisto completato</p>
 
                   <p className="tx-hash">
                     <strong>Tx hash:</strong>{" "}
-                    <span className="mono">{txHash}</span>
+                    <span className="mono">{txDataHash}</span>
                   </p>
 
                   <a
