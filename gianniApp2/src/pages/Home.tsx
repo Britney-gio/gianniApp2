@@ -101,8 +101,8 @@ export default function Home() {
                   <img src={product.image} alt={product.name} />
                   <button
                     onClick={() =>
-                      navigate("/checkout/", {
-                        state: { product },
+                      navigate("/checkout", {
+                        state: { productItem: product },
                       })
                     }
                   >
