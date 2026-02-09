@@ -1,4 +1,5 @@
 import { useLocation, Navigate, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import type { Product } from "../types/product";
 import "../styles/home.scss";
 
@@ -12,6 +13,9 @@ import {
 
 import { formatUnits, parseEther } from "viem";
 
+const RECIPIENT_ADDRESS = "0x359CDd44E2a0dC045A8b0E62d2B0d685429EF894"; // GIANNI WALLET
+const PRICE_ETH = "0.001"; // prezzo in ETH (Sepolia)
+
 export default function Checkout() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -19,6 +23,10 @@ export default function Checkout() {
   const { address, isConnected } = useAccount();
   const { connectors, connect, isPending } = useConnect();
   const { disconnect } = useDisconnect();
+
+  const [selectedConnectorUid, setSelectedConnectorUid] = useState<
+    string | null
+  >(null);
 
   // PRODOTTO SCELTO
   const productItem = location.state?.productItem as Product | undefined;
@@ -33,10 +41,12 @@ export default function Checkout() {
     ? formatUnits(balanceData.value, balanceData.decimals)
     : null;
 
-  // TRANSAZIONE
-  const RECIPIENT_ADDRESS = "0x359CDd44E2a0dC045A8b0E62d2B0d685429EF894"; // GIANNI WALLET
-  const PRICE_ETH = "0.001"; // prezzo in ETH (Sepolia)
+  const priceWei = parseEther(PRICE_ETH);
+  const hasEnoughBalance = Boolean(
+    balanceData && balanceData.value >= priceWei,
+  );
 
+  // TRANSAZIONE
   const {
     sendTransaction,
     data: txHash,
@@ -50,16 +60,13 @@ export default function Checkout() {
     : null;
 
   const handleConfirmPurchase = () => {
-    if (!address) return;
+    if (!isConnected || !address) return;
 
     sendTransaction({
       to: RECIPIENT_ADDRESS,
-      value: parseEther(PRICE_ETH),
+      value: priceWei,
     });
   };
-
-  const hasEnoughBalance =
-    formattedBalance && Number(formattedBalance) >= Number(PRICE_ETH);
 
   if (!productItem) {
     return <Navigate to="/" replace />;
@@ -88,24 +95,31 @@ export default function Checkout() {
               <div className="wallet-box">
                 <p>Collega il wallet per procedere all’acquisto</p>
 
-                {connectors.map((connector) => (
-                  <button
-                    key={connector.uid}
-                    onClick={() => connect({ connector })}
-                    disabled={isPending}
-                  >
-                    Connetti {connector.name}
-                    {isPending && " (in corso...)"}
-                  </button>
-                ))}
+                <div className="wallet-buttons">
+                  {connectors.map((connector) => (
+                    <button
+                      key={connector.uid}
+                      onClick={() => {
+                        setSelectedConnectorUid(connector.uid);
+                        connect({ connector });
+                      }}
+                      disabled={isPending}
+                    >
+                      Connetti {connector.name}
+                      {isPending &&
+                        selectedConnectorUid === connector.uid &&
+                        " (in corso...)"}
+                    </button>
+                  ))}
+                </div>
               </div>
             )}
 
-            <img src={productItem?.image} alt={productItem?.name} />
-            <h2>{productItem?.name}</h2>
-            <p>{productItem?.description}</p>
-            <p>Origine: {productItem?.origin}</p>
-            <p>Quantità: {productItem?.quantity}</p>
+            <img src={productItem.image} alt={productItem.name} />
+            <h2>{productItem.name}</h2>
+            <p>{productItem.description}</p>
+            <p>Origine: {productItem.origin}</p>
+            <p>Quantità: {productItem.quantity}</p>
             <p>
               <strong>Prezzo al kg:</strong> {PRICE_ETH} ETH
             </p>
@@ -114,7 +128,12 @@ export default function Checkout() {
           {/* COLONNA DESTRA — WALLET */}
           {isConnected && (
             <aside className="checkout-right wallet-info">
-              <h3>Wallet connesso</h3>
+              <div className="wallet-topbar">
+                <h3>Wallet connesso</h3>
+                <button className="disconnect-btn" onClick={() => disconnect()}>
+                  Disconnetti
+                </button>
+              </div>
 
               <p className="address">{address}</p>
 
@@ -134,15 +153,23 @@ export default function Checkout() {
                 <p className="error">Saldo insufficiente</p>
               )}
 
-              <button onClick={() => disconnect()}>Disconnetti</button>
-
-              <button
-                className="confirm-button"
-                onClick={handleConfirmPurchase}
-                disabled={isTxPending || !hasEnoughBalance}
-              >
-                {isTxPending ? "Transazione in corso..." : "Conferma acquisto"}
-              </button>
+              <div className="wallet-actions">
+                {!isTxSuccess ? (
+                  <button
+                    className="confirm-button"
+                    onClick={handleConfirmPurchase}
+                    disabled={isTxPending || !hasEnoughBalance}
+                  >
+                    {isTxPending
+                      ? "Transazione in corso..."
+                      : "Conferma acquisto"}
+                  </button>
+                ) : (
+                  <button className="confirm-button" disabled>
+                    Acquisto completato
+                  </button>
+                )}
+              </div>
 
               {isTxSuccess && txHash && (
                 <div className="tx-info">
