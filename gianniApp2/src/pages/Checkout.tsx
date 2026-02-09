@@ -1,6 +1,7 @@
 import { useLocation, Navigate, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import type { Product } from "../types/product";
+import TopNav from "../components/TopNav";
 import "../styles/home.scss";
 
 import {
@@ -73,6 +74,18 @@ export default function Checkout() {
 
   return (
     <main className="page">
+      <TopNav
+        rightSlot={
+          <button
+            type="button"
+            className="top-nav__btn"
+            onClick={() => navigate("/")}
+          >
+            Home
+          </button>
+        }
+      />
+
       <header className="hero">
         <h1>Checkout</h1>
         <p>Rivedi i dettagli e conferma il tuo ordine.</p>

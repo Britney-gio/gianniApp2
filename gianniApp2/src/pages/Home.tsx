@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { productList } from "../data/productList";
 import { useNavigate } from "react-router-dom";
+import TopNav from "../components/TopNav";
 import "../styles/home.scss";
 
 function getVisibleItems() {
@@ -66,6 +67,7 @@ export default function Home() {
 
   return (
     <main className="page">
+      <TopNav />
       <header className="hero">
         <h1>Benvenuto nell'e-commerce innovativo di Gianni</h1>
         <h2>Dalla terra di Sicilia alla blockchain Ethereum</h2>
