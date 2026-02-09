@@ -1,5 +1,5 @@
 import { useLocation, Navigate, useNavigate } from "react-router-dom";
-import type { Prodotti } from "../types/prodotti";
+import type { Product } from "../types/product";
 import "../styles/home.scss";
 
 import {
@@ -21,7 +21,7 @@ export default function Checkout() {
   const { disconnect } = useDisconnect();
 
   // PRODOTTO SCELTO
-  const prodotto = location.state?.prodotto as Prodotti | undefined;
+  const productItem = location.state?.productItem as Product | undefined;
 
   // BALANCE WALLET CONNESSO
   const { data: balanceData, isLoading: isBalanceLoading } = useBalance({
@@ -34,8 +34,8 @@ export default function Checkout() {
     : null;
 
   // TRANSAZIONE
-  const DESTINATARIO = "0x359CDd44E2a0dC045A8b0E62d2B0d685429EF894"; // GIANNI WALLET
-  const PREZZO_ETH = "0.001"; // prezzo in ETH (Sepolia)
+  const RECIPIENT_ADDRESS = "0x359CDd44E2a0dC045A8b0E62d2B0d685429EF894"; // GIANNI WALLET
+  const PRICE_ETH = "0.001"; // prezzo in ETH (Sepolia)
 
   const {
     sendTransaction,
@@ -53,15 +53,15 @@ export default function Checkout() {
     if (!address) return;
 
     sendTransaction({
-      to: DESTINATARIO,
-      value: parseEther(PREZZO_ETH),
+      to: RECIPIENT_ADDRESS,
+      value: parseEther(PRICE_ETH),
     });
   };
 
-  const saldoSufficiente =
-    formattedBalance && Number(formattedBalance) >= Number(PREZZO_ETH);
+  const hasEnoughBalance =
+    formattedBalance && Number(formattedBalance) >= Number(PRICE_ETH);
 
-  if (!prodotto) {
+  if (!productItem) {
     return <Navigate to="/" replace />;
   }
 
@@ -83,7 +83,7 @@ export default function Checkout() {
       <div className="checkout-wrapper">
         <section className="checkout-layout">
           {/* COLONNA SINISTRA — PRODOTTO */}
-          <div className="checkout-left prodotto-card">
+          <div className="checkout-left product-card">
             {!isConnected && (
               <div className="wallet-box">
                 <p>Collega il wallet per procedere all’acquisto</p>
@@ -101,13 +101,13 @@ export default function Checkout() {
               </div>
             )}
 
-            <img src={prodotto.immagine} alt={prodotto.nome} />
-            <h2>{prodotto.nome}</h2>
-            <p>{prodotto.descrizione}</p>
-            <p>Origine: {prodotto.origine}</p>
-            <p>Quantità: {prodotto.quantità}</p>
+            <img src={productItem?.image} alt={productItem?.name} />
+            <h2>{productItem?.name}</h2>
+            <p>{productItem?.description}</p>
+            <p>Origine: {productItem?.origin}</p>
+            <p>Quantità: {productItem?.quantity}</p>
             <p>
-              <strong>Prezzo al kg:</strong> {PREZZO_ETH} ETH
+              <strong>Prezzo al kg:</strong> {PRICE_ETH} ETH
             </p>
           </div>
 
@@ -130,7 +130,7 @@ export default function Checkout() {
                   "Saldo non disponibile"}
               </p>
 
-              {!saldoSufficiente && (
+              {!hasEnoughBalance && (
                 <p className="error">Saldo insufficiente</p>
               )}
 
@@ -139,7 +139,7 @@ export default function Checkout() {
               <button
                 className="confirm-button"
                 onClick={handleConfirmPurchase}
-                disabled={isTxPending || !saldoSufficiente}
+                disabled={isTxPending || !hasEnoughBalance}
               >
                 {isTxPending ? "Transazione in corso..." : "Conferma acquisto"}
               </button>

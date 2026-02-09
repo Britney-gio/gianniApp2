@@ -17,29 +17,29 @@
     text-align: left;
   }
 
-  .carosello {
+  .carousel {
     padding: 1rem 0;
   }
 
-  .freccia {
+  .arrow {
     width: 46px;
     height: 46px;
     font-size: 1.75rem;
   }
 
-  .freccia.sx {
+  .arrow.sx {
     left: -12px;
   }
 
-  .freccia.dx {
+  .arrow.dx {
     right: -12px;
   }
 
-  .lista-prodotti {
+  .product-list {
     gap: 1.5rem;
   }
 
-  .prodotto-card {
+  .product-card {
     flex: 0 0 calc(50% - 0.75rem);
     max-width: calc(50% - 0.75rem);
   }
@@ -51,29 +51,29 @@
     padding: 3rem 2.5rem 4.5rem;
   }
 
-  .prodotti {
+  .product {
     max-width: 1000px;
   }
 
-  .freccia {
+  .arrow {
     width: 52px;
     height: 52px;
     font-size: 2rem;
   }
 
-  .freccia.sx {
+  .arrow.sx {
     left: -16px;
   }
 
-  .freccia.dx {
+  .arrow.dx {
     right: -16px;
   }
 
-  .lista-prodotti {
+  .product-list {
     gap: 2rem;
   }
 
-  .prodotto-card {
+  .product-card {
     flex: 0 0 calc(33.333% - 1.333rem);
     max-width: calc(33.333% - 1.333rem);
   }

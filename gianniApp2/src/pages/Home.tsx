@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { listaProdotti } from "../data/listaProdotti";
+import { productList } from "../data/productList";
 import { useNavigate } from "react-router-dom";
 import "../styles/home.scss";
 
@@ -75,34 +75,34 @@ export default function Home() {
         </div>
       )}
 
-      <section className="prodotti">
+      <section className="products">
         <h2>I prodotti della nostra terra:</h2>
         <p>
           Tutti i prodotti provengono dai campi di Gianni, situati in Sicilia,
           coltivati e curati con metodi biologici e sostenibili da lui e dalla
           sua famiglia.
         </p>
-        <div className="carosello">
-          <button className="freccia sx" onClick={scrollPrev}>
+        <div className="carousel">
+          <button className="arrow sx" onClick={scrollPrev}>
             {"←"}
           </button>
 
-          <div className="carosello-viewport">
-            <ul className="lista-prodotti" ref={carouselRef}>
-              {listaProdotti.map((prodotto) => (
-                <li key={prodotto.id} className="prodotto-card">
-                  <h3>{prodotto.nome}</h3>
-                  <p>{prodotto.descrizione}</p>
-                  <p>Origine: {prodotto.origine}</p>
-                  <p>Quantità: {prodotto.quantità}</p>
+          <div className="carousel-viewport">
+            <ul className="product-list" ref={carouselRef}>
+              {productList.map((product) => (
+                <li key={product.id} className="product-card">
+                  <h3>{product.name}</h3>
+                  <p>{product.description}</p>
+                  <p>Origine: {product.origin}</p>
+                  <p>Quantità: {product.quantity}</p>
                   <p>
-                    <strong>Prezzo al kg:</strong> {prodotto.prezzo}
+                    <strong>Prezzo al kg:</strong> {product.price}
                   </p>
-                  <img src={prodotto.immagine} alt={prodotto.nome} />
+                  <img src={product.image} alt={product.name} />
                   <button
                     onClick={() =>
                       navigate("/checkout/", {
-                        state: { prodotto },
+                        state: { product },
                       })
                     }
                   >
@@ -112,7 +112,7 @@ export default function Home() {
               ))}
             </ul>
           </div>
-          <button className="freccia dx" onClick={scrollNext}>
+          <button className="arrow dx" onClick={scrollNext}>
             {"→"}
           </button>
         </div>
