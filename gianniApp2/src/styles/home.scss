@@ -82,50 +82,26 @@
   overflow: hidden;
 }
 
-.carousel-arrow {
+.carousel-arrow,
+.arrow {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
 
-  background: rgba(107, 142, 35);
-  border: 1px solid #ddd;
-  border-radius: 999px;
+  background: rgba(107, 142, 35, 0.95);
+  border: none;
+  border-radius: 900px;
 
-  width: 32px;
-  height: 32px;
-  padding: 0;
+  padding: 30px;
 
   cursor: pointer;
-  font-size: 1.2rem;
-  line-height: 1;
+  font-size: 1rem;
+  color: white;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1;
-}
 
-.carousel-arrow:hover {
-  transform: translateY(-50%);
-  box-shadow: none;
-}
-
-.carousel-arrow:focus,
-.carousel-arrow:focus-visible {
-  outline: 3px solid rgba(107, 142, 35, 0.4);
-  outline-offset: 2px;
-}
-
-.carousel-arrow.left {
-  left: -6px;
-}
-
-.carousel-arrow.right {
-  right: -6px;
-}
-
-.carousel-arrow:disabled {
-  opacity: 0.35;
-  cursor: not-allowed;
+  z-index: 2;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
 }
 
 .product-list {
@@ -169,11 +145,12 @@
   scroll-snap-align: center;
 }
 
+/* IMMAGINI ALLINEATE (MODIFICA 2) */
 .product-card img {
+  width: 100%;
+  height: 180px;
   border-radius: 10px;
   object-fit: cover;
-  width: 300px;
-  height: 200px;
 }
 
 .product-card button {

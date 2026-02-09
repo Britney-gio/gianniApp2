@@ -18,12 +18,18 @@ export default function Home() {
 
   const handlePrev = () => {
     if (totalItems === 0) return;
-    setCurrentIndex((prev) => (prev - 1 < 0 ? totalItems - 1 : prev - 1));
+    setCurrentIndex((prev) =>
+      prev - VISIBLE_ITEMS < 0
+        ? totalItems - VISIBLE_ITEMS
+        : prev - VISIBLE_ITEMS,
+    );
   };
 
   const handleNext = () => {
     if (totalItems === 0) return;
-    setCurrentIndex((prev) => (prev + 1 >= totalItems ? 0 : prev + 1));
+    setCurrentIndex((prev) =>
+      prev + VISIBLE_ITEMS >= totalItems ? 0 : prev + VISIBLE_ITEMS,
+    );
   };
 
   const visibleProducts = useMemo(() => {
