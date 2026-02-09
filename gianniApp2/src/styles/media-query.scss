@@ -102,3 +102,7 @@
     font-size: 1.1rem;
   }
 }
+
+.features__grid {
+  grid-template-columns: repeat(3, 1fr);
+}

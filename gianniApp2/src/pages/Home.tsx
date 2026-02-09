@@ -68,22 +68,88 @@ export default function Home() {
   return (
     <main className="page">
       <TopNav />
-      <header className="hero">
-        <h1>Benvenuto nell'e-commerce innovativo di Gianni</h1>
-        <h2>Dalla terra di Sicilia alla blockchain Ethereum</h2>
 
-        <p>
-          Gianni è un agricoltore siciliano che insieme alla sua famiglia da
-          generazioni coltiva la propria terra con passione e rispetto per la
-          natura. Oggi porta i suoi prodotti biologici e a km zero nel mondo
-          Web3, unendo tradizione e innovazione.
-        </p>
+      <header
+        className="hero hero--img"
+        style={{ backgroundImage: "url(/img-footer.jpg)" }}
+      >
+        <div className="hero__overlay" />
 
-        <p>
-          In questa piattaforma è possibile acquistare esclusivamente tramite
-          token su blockchain Ethereum, utilizzando ETH di prova su rete test.
-        </p>
+        <div className="hero__content">
+          <h1>Benvenuto nell'e-commerce innovativo di Gianni</h1>
+          <h2>Dalla terra di Sicilia alla blockchain Ethereum</h2>
+
+          <p>
+            Gianni è un agricoltore siciliano che insieme alla sua famiglia da
+            generazioni coltiva la propria terra con passione e rispetto per la
+            natura. Oggi porta i suoi prodotti biologici e a km zero nel mondo
+            Web3, unendo tradizione e innovazione.
+          </p>
+
+          <p>
+            In questa piattaforma è possibile acquistare esclusivamente tramite
+            token su blockchain Ethereum, utilizzando ETH di prova su rete test.
+          </p>
+        </div>
       </header>
+
+      <section className="features" aria-label="Come funziona">
+        <h2>Come funziona</h2>
+
+        <div className="features__grid">
+          <article className="feature-card">
+            <h3>1) Scegli il prodotto</h3>
+            <p>
+              Seleziona agrumi, frutta secca e specialità locali direttamente
+              dalla vetrina.
+            </p>
+          </article>
+
+          <article className="feature-card">
+            <h3>2) Connetti il wallet</h3>
+            <p>
+              Collega MetaMask e verifica il saldo su Sepolia prima
+              dell’acquisto.
+            </p>
+          </article>
+
+          <article className="feature-card">
+            <h3>3) Paga in ETH (test)</h3>
+            <p>
+              Confermi la transazione e puoi tracciare tutto su Etherscan in
+              trasparenza.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section className="whyweb3" aria-label="Perché Web3">
+        <div className="whyweb3__content">
+          <h2>Perché Web3?</h2>
+          <p>
+            Questo progetto è una demo didattica: un checkout che simula un
+            acquisto “trasparente” grazie alla blockchain.
+          </p>
+          <ul>
+            <li>Tracciabilità pubblica della transazione</li>
+            <li>Wallet come identità dell’utente</li>
+            <li>Base solida per evoluzioni (token, loyalty, supply chain)</li>
+          </ul>
+
+          <div className="whyweb3__cta">
+            <button
+              type="button"
+              className="primary"
+              onClick={() => navigate("/")}
+            >
+              Esplora i prodotti
+            </button>
+            <a className="secondary" href="#products">
+              Vai alla gallery
+            </a>
+          </div>
+        </div>
+      </section>
 
       <button
         className="alert-button"
@@ -171,7 +237,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="footer">
+      <footer className="footer footer-img">
         <p>Grazie per aver scelto un'agricoltura sostenibile e trasparente.</p>
         <p>Lo staff dell'azienda agricola di Gianni</p>
         <img src="/img-footer.jpg" alt="campo Gianni vista Etna" />

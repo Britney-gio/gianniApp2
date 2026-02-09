@@ -90,15 +90,6 @@ export default function Checkout() {
         <p>Rivedi i dettagli e conferma il tuo ordine.</p>
       </header>
 
-      {/* (Opzionale) Questo bottone "Home" è ridondante perché c'è già in TopNav */}
-      <button
-        className="alert-button"
-        type="button"
-        onClick={() => navigate("/")}
-      >
-        Home
-      </button>
-
       <div className="checkout-wrapper">
         <section className="checkout-layout">
           {/* COLONNA SINISTRA — PRODOTTO */}
