@@ -7,7 +7,6 @@
   }
 
   .hero,
-  .alert,
   .footer {
     text-align: left;
   }
@@ -21,18 +20,21 @@
     padding: 1rem 0;
   }
 
+  .carousel-arrow,
   .arrow {
     width: 46px;
     height: 46px;
     font-size: 1.75rem;
   }
 
+  .carousel-arrow.left,
   .arrow.sx {
-    left: -12px;
+    left: -56px;
   }
 
+  .carousel-arrow.right,
   .arrow.dx {
-    right: -12px;
+    right: -56px;
   }
 
   .product-list {
@@ -51,22 +53,25 @@
     padding: 3rem 2.5rem 4.5rem;
   }
 
-  .product {
+  .products {
     max-width: 1000px;
   }
 
+  .carousel-arrow,
   .arrow {
     width: 52px;
     height: 52px;
     font-size: 2rem;
   }
 
+  .carousel-arrow.left,
   .arrow.sx {
-    left: -16px;
+    left: -64px;
   }
 
+  .carousel-arrow.right,
   .arrow.dx {
-    right: -16px;
+    right: -64px;
   }
 
   .product-list {
@@ -80,14 +85,20 @@
 }
 
 @media (max-width: 768px) {
-  .checkout-layout {
-    flex-direction: column;
-    align-items: center;
+  .carousel-arrow.left,
+  .arrow.sx {
+    left: 6px;
   }
 
-  .checkout-left,
-  .checkout-right {
-    width: 100%;
-    max-width: 360px;
+  .carousel-arrow.right,
+  .arrow.dx {
+    right: 6px;
+  }
+
+  .carousel-arrow,
+  .arrow {
+    width: 38px;
+    height: 38px;
+    font-size: 1.1rem;
   }
 }

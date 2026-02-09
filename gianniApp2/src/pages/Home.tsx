@@ -1,7 +1,14 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { productList } from "../data/productList";
 import { useNavigate } from "react-router-dom";
 import "../styles/home.scss";
+
+function getVisibleItems() {
+  if (typeof window === "undefined") return 3;
+  if (window.innerWidth < 768) return 1;
+  if (window.innerWidth < 1024) return 2;
+  return 3;
+}
 
 export default function Home() {
   const navigate = useNavigate();
@@ -11,36 +18,51 @@ export default function Home() {
   const alertMessage: string =
     "Questa scelta non rappresenta solo un'innovazione tecnologica, ma anche una scelta ecologica. I token ERC-20 costituiscono un metodo digamento a basso impatto ambientale, poiché non richiedono la stampa di denaro fisico e riducono le emissioni legate alla sua produzione e gestione.";
 
-  const VISIBLE_ITEMS = 3; // CARD VISIBILI NEL CAROUSEL
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [visibleItems, setVisibleItems] = useState(getVisibleItems());
 
   const totalItems = productList.length;
+  const lastStartIndex = Math.max(0, totalItems - visibleItems);
+
+  useEffect(() => {
+    const onResize = () => setVisibleItems(getVisibleItems());
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  useEffect(() => {
+    if (totalItems === 0) return;
+    setCurrentIndex((prev) => Math.min(prev, lastStartIndex));
+  }, [totalItems, lastStartIndex]);
 
   const handlePrev = () => {
     if (totalItems === 0) return;
-    setCurrentIndex((prev) =>
-      prev - VISIBLE_ITEMS < 0
-        ? totalItems - VISIBLE_ITEMS
-        : prev - VISIBLE_ITEMS,
-    );
+
+    setCurrentIndex((prev) => {
+      const next = prev - visibleItems;
+      return next < 0 ? lastStartIndex : next;
+    });
   };
 
   const handleNext = () => {
     if (totalItems === 0) return;
-    setCurrentIndex((prev) =>
-      prev + VISIBLE_ITEMS >= totalItems ? 0 : prev + VISIBLE_ITEMS,
-    );
+
+    setCurrentIndex((prev) => {
+      const next = prev + visibleItems;
+      return next >= totalItems ? 0 : next;
+    });
   };
 
   const visibleProducts = useMemo(() => {
     if (totalItems === 0) return [];
-    const count = Math.min(VISIBLE_ITEMS, totalItems);
+    const count = Math.min(visibleItems, totalItems);
+
     const items = [];
     for (let i = 0; i < count; i++) {
       items.push(productList[(currentIndex + i) % totalItems]);
     }
     return items;
-  }, [currentIndex, totalItems]);
+  }, [currentIndex, totalItems, visibleItems]);
 
   return (
     <main className="page">
@@ -100,8 +122,14 @@ export default function Home() {
         </p>
 
         <div className="carousel">
-          <button className="arrow sx" onClick={handlePrev} type="button">
-            {"←"}
+          <button
+            className="arrow sx"
+            onClick={handlePrev}
+            type="button"
+            aria-label="Prodotti precedenti"
+            disabled={totalItems <= visibleItems}
+          >
+            ←
           </button>
 
           <div className="carousel-viewport">
@@ -119,9 +147,7 @@ export default function Home() {
                   <button
                     type="button"
                     onClick={() =>
-                      navigate("/checkout", {
-                        state: { productItem: product },
-                      })
+                      navigate("/checkout", { state: { productItem: product } })
                     }
                   >
                     Procedi all' acquisto
@@ -131,8 +157,14 @@ export default function Home() {
             </ul>
           </div>
 
-          <button className="arrow dx" onClick={handleNext} type="button">
-            {"→"}
+          <button
+            className="arrow dx"
+            onClick={handleNext}
+            type="button"
+            aria-label="Prodotti successivi"
+            disabled={totalItems <= visibleItems}
+          >
+            →
           </button>
         </div>
       </section>
