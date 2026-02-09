@@ -24,10 +24,10 @@ export default function Checkout() {
   const { connectors, connect, isPending } = useConnect();
   const { disconnect } = useDisconnect();
 
-  // Per mostrare "in corso" solo sul bottone cliccato
-  const [selectedConnectorUid, setSelectedConnectorUid] = useState<string | null>(
-    null
-  );
+  // Per mostrare "(in corso...)" solo sul bottone cliccato
+  const [selectedConnectorUid, setSelectedConnectorUid] = useState<
+    string | null
+  >(null);
 
   // PRODOTTO SCELTO
   const productItem = location.state?.productItem as Product | undefined;
@@ -155,7 +155,11 @@ export default function Checkout() {
                   onClick={handleConfirmPurchase}
                   disabled={isTxPending || !hasEnoughBalance || isTxSuccess}
                 >
-                  {isTxPending ? "Transazione in corso..." : "Conferma acquisto"}
+                  {isTxSuccess
+                    ? "Acquisto completato"
+                    : isTxPending
+                      ? "Transazione in corso..."
+                      : "Conferma acquisto"}
                 </button>
               </div>
 

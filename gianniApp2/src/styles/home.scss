@@ -36,7 +36,8 @@
   font-size: 0.95rem;
 }
 
-.prodotti {
+/* era .prodotti, ma nel JSX ora è "products" */
+.products {
   width: 100%;
 }
 
@@ -81,7 +82,7 @@
   overflow: hidden;
 }
 
-.arrow {
+.carousel-arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -103,23 +104,28 @@
   z-index: 1;
 }
 
-.arrow:hover {
+.carousel-arrow:hover {
   transform: translateY(-50%);
   box-shadow: none;
 }
 
-.arrow:focus,
-.arrow:focus-visible {
+.carousel-arrow:focus,
+.carousel-arrow:focus-visible {
   outline: 3px solid rgba(107, 142, 35, 0.4);
   outline-offset: 2px;
 }
 
-.arrow.sx {
+.carousel-arrow.left {
   left: -6px;
 }
 
-.arrow.dx {
+.carousel-arrow.right {
   right: -6px;
+}
+
+.carousel-arrow:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
 }
 
 .product-list {
@@ -172,6 +178,7 @@
 
 .product-card button {
   width: 100%;
+  margin-top: 10px;
 }
 
 .checkout-card {
@@ -231,26 +238,9 @@
   gap: 12px;
 }
 
-.wallet-topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 12px;
-}
-
 .wallet-actions {
   display: flex;
   flex-direction: column;
   gap: 12px;
   margin-top: 12px;
-}
-
-.product-card button {
-  margin-top: 10px;
-}
-
-.carousel-arrow:disabled {
-  opacity: 0.35;
-  cursor: not-allowed;
 }

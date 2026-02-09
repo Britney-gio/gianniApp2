@@ -15,28 +15,26 @@ export default function Home() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const totalItems = productList.length;
-  const canNavigate = totalItems > 1;
 
   const handlePrev = () => {
-    if (!canNavigate) return;
+    if (totalItems === 0) return;
     setCurrentIndex((prev) => (prev - 1 < 0 ? totalItems - 1 : prev - 1));
   };
 
   const handleNext = () => {
-    if (!canNavigate) return;
+    if (totalItems === 0) return;
     setCurrentIndex((prev) => (prev + 1 >= totalItems ? 0 : prev + 1));
   };
 
   const visibleProducts = useMemo(() => {
     if (totalItems === 0) return [];
-    const items: typeof productList = [];
     const count = Math.min(VISIBLE_ITEMS, totalItems);
-
+    const items = [];
     for (let i = 0; i < count; i++) {
       items.push(productList[(currentIndex + i) % totalItems]);
     }
     return items;
-  }, [currentIndex, totalItems, VISIBLE_ITEMS]);
+  }, [currentIndex, totalItems]);
 
   return (
     <main className="page">
@@ -96,14 +94,8 @@ export default function Home() {
         </p>
 
         <div className="carousel">
-          <button
-            type="button"
-            className="carousel-arrow left"
-            onClick={handlePrev}
-            aria-label="Prodotti precedenti"
-            disabled={!canNavigate}
-          >
-            ←
+          <button className="arrow sx" onClick={handlePrev} type="button">
+            {"←"}
           </button>
 
           <div className="carousel-viewport">
@@ -133,14 +125,8 @@ export default function Home() {
             </ul>
           </div>
 
-          <button
-            type="button"
-            className="carousel-arrow right"
-            onClick={handleNext}
-            aria-label="Prodotti successivi"
-            disabled={!canNavigate}
-          >
-            →
+          <button className="arrow dx" onClick={handleNext} type="button">
+            {"→"}
           </button>
         </div>
       </section>
