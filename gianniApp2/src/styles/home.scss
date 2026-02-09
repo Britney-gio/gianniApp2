@@ -249,3 +249,8 @@
 .product-card button {
   margin-top: 10px;
 }
+
+.carousel-arrow:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}

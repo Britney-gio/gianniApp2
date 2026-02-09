@@ -24,9 +24,10 @@ export default function Checkout() {
   const { connectors, connect, isPending } = useConnect();
   const { disconnect } = useDisconnect();
 
-  const [selectedConnectorUid, setSelectedConnectorUid] = useState<
-    string | null
-  >(null);
+  // Per mostrare "in corso" solo sul bottone cliccato
+  const [selectedConnectorUid, setSelectedConnectorUid] = useState<string | null>(
+    null
+  );
 
   // PRODOTTO SCELTO
   const productItem = location.state?.productItem as Product | undefined;
@@ -41,10 +42,8 @@ export default function Checkout() {
     ? formatUnits(balanceData.value, balanceData.decimals)
     : null;
 
-  const priceWei = parseEther(PRICE_ETH);
-  const hasEnoughBalance = Boolean(
-    balanceData && balanceData.value >= priceWei,
-  );
+  const hasEnoughBalance =
+    formattedBalance && Number(formattedBalance) >= Number(PRICE_ETH);
 
   // TRANSAZIONE
   const {
@@ -60,11 +59,11 @@ export default function Checkout() {
     : null;
 
   const handleConfirmPurchase = () => {
-    if (!isConnected || !address) return;
+    if (!address) return;
 
     sendTransaction({
       to: RECIPIENT_ADDRESS,
-      value: priceWei,
+      value: parseEther(PRICE_ETH),
     });
   };
 
@@ -128,12 +127,7 @@ export default function Checkout() {
           {/* COLONNA DESTRA — WALLET */}
           {isConnected && (
             <aside className="checkout-right wallet-info">
-              <div className="wallet-topbar">
-                <h3>Wallet connesso</h3>
-                <button className="disconnect-btn" onClick={() => disconnect()}>
-                  Disconnetti
-                </button>
-              </div>
+              <h3>Wallet connesso</h3>
 
               <p className="address">{address}</p>
 
@@ -154,21 +148,15 @@ export default function Checkout() {
               )}
 
               <div className="wallet-actions">
-                {!isTxSuccess ? (
-                  <button
-                    className="confirm-button"
-                    onClick={handleConfirmPurchase}
-                    disabled={isTxPending || !hasEnoughBalance}
-                  >
-                    {isTxPending
-                      ? "Transazione in corso..."
-                      : "Conferma acquisto"}
-                  </button>
-                ) : (
-                  <button className="confirm-button" disabled>
-                    Acquisto completato
-                  </button>
-                )}
+                <button onClick={() => disconnect()}>Disconnetti</button>
+
+                <button
+                  className="confirm-button"
+                  onClick={handleConfirmPurchase}
+                  disabled={isTxPending || !hasEnoughBalance || isTxSuccess}
+                >
+                  {isTxPending ? "Transazione in corso..." : "Conferma acquisto"}
+                </button>
               </div>
 
               {isTxSuccess && txHash && (
