@@ -85,7 +85,7 @@ export default function Checkout() {
         }
       />
 
-      <header className="hero">
+      <header className="hero mt-10 ">
         <h1>Checkout</h1>
         <p>Rivedi i dettagli e conferma il tuo ordine.</p>
       </header>
