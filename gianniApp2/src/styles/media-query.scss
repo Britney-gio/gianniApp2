@@ -106,3 +106,33 @@
 .features__grid {
   grid-template-columns: repeat(3, 1fr);
 }
+
+@media (min-width: 768px) {
+  .features__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .product-card {
+    flex: 0 0 48%;
+    max-width: 48%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .product-card {
+    flex: 0 0 32%;
+    max-width: 32%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .product-card {
+    flex: 0 0 32%;
+    max-width: 32%;
+  }
+}
+@media (min-width: 1024px) {
+  .product-list {
+    gap: 1.5rem;
+  }
+}

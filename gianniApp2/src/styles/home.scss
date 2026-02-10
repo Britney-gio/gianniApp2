@@ -1,3 +1,5 @@
+@import "./variabili";
+
 .features,
 .whyweb3 {
   margin: 28px 0;
@@ -12,7 +14,7 @@
   padding: 16px;
   border-radius: 16px;
   border: 1px solid rgba(0, 0, 0, 0.08);
-  background: #ffffff;
+  background: $bianco;
 
   transform: translateY(6px);
   opacity: 0;
@@ -43,7 +45,7 @@
   padding: 18px;
   border-radius: 18px;
   border: 1px solid rgba(0, 0, 0, 0.08);
-  background: #ffffff;
+  background: $bianco;
   animation: fadeUp 500ms ease forwards;
 
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
@@ -73,8 +75,6 @@
   flex-wrap: wrap;
 }
 
-/* --- CAROUSEL --- */
-
 .carousel {
   position: relative;
   display: flex;
@@ -82,6 +82,8 @@
   justify-content: center;
   text-align: center;
   padding: 0.5rem 0;
+  padding-left: 60px;
+  padding-right: 60px;
 }
 
 .carousel-viewport {
@@ -94,7 +96,7 @@
   top: 50%;
   transform: translateY(-50%);
 
-  background: rgba(5, 150, 105, 0.95);
+  background: $verde-oliva;
   border: none;
   border-radius: 999px;
 
@@ -104,7 +106,7 @@
 
   cursor: pointer;
   font-size: 1.3rem;
-  color: #fff;
+  color: $bianco;
 
   display: flex;
   align-items: center;
@@ -123,11 +125,11 @@
 }
 
 .arrow.sx {
-  left: -50px;
+  left: 8px;
 }
 
 .arrow.dx {
-  right: -50px;
+  right: 8px;
 }
 
 .arrow:disabled {
@@ -135,8 +137,6 @@
   cursor: not-allowed;
   transform: translateY(-50%);
 }
-
-/* --- PRODUCT LIST --- */
 
 .product-list {
   list-style: none;
@@ -159,6 +159,16 @@
   background: rgba(0, 0, 0, 0.15);
   border-radius: 999px;
 }
+.wide-section {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+}
+
+.carousel-wide {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
 
 .product-card {
   flex: 0 0 85%;
@@ -167,7 +177,7 @@
   padding: 1.25rem;
   border-radius: 18px;
   border: 1px solid rgba(0, 0, 0, 0.08);
-  background: #ffffff;
+  background: $bianco;
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
 
   display: flex;
@@ -203,8 +213,8 @@
   padding: 12px 14px;
   border-radius: 14px;
   border: none;
-  background: rgba(5, 150, 105, 0.95);
-  color: #fff;
+  background: $verde-oliva;
+  color: $bianco;
   font-weight: 600;
   cursor: pointer;
 
@@ -222,8 +232,6 @@
   opacity: 0.92;
 }
 
-/* --- ALERT MODAL --- */
-
 .alert-overlay {
   position: fixed;
   inset: 0;
@@ -237,7 +245,7 @@
 
 .alert-modal {
   width: min(520px, 100%);
-  background: #ffffff;
+  background: $bianco;
   border-radius: 16px;
   padding: 1.5rem;
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.16);
@@ -247,31 +255,9 @@
   text-align: center;
 }
 
-/* --- ANIMATION --- */
-
 @keyframes fadeUp {
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-/* --- RESPONSIVE --- */
-
-@media (min-width: 768px) {
-  .features__grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .product-card {
-    flex: 0 0 48%;
-    max-width: 48%;
-  }
-}
-
-@media (min-width: 1024px) {
-  .product-card {
-    flex: 0 0 32%;
-    max-width: 32%;
   }
 }

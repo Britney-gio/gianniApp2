@@ -6,7 +6,7 @@ export default function NotFound() {
     <div className="page">
       <h1>Pagina non trovata</h1>
       <button
-        className="alert-button"
+        className="btn-primary alert-button"
         type="button"
         onClick={() => navigate("/")}
       >

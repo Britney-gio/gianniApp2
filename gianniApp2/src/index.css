@@ -3,27 +3,56 @@
 @tailwind utilities;
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-  }
-
   body {
-    @apply bg-slate-50 text-slate-900 antialiased;
-  }
-
-  h1 {
-    @apply text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900;
-  }
-
-  h2 {
-    @apply text-2xl md:text-3xl font-bold tracking-tight text-slate-900;
-  }
-
-  p {
-    @apply text-slate-700 leading-relaxed;
+    @apply bg-sand text-slate-900 antialiased;
   }
 }
 
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-semibold
+    transition duration-200 ease-out
+    focus:outline-none focus:ring-2 focus:ring-olive/40 focus:ring-offset-2 focus:ring-offset-sand
+    disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-primary {
+    @apply bg-olive text-white hover:bg-olive/90 active:bg-olive/80;
+  }
+  .btn-dark {
+    @apply bg-slate-900 text-white hover:bg-slate-800 active:bg-slate-950;
+  }
+  .btn-outline {
+    @apply border border-slate-300 text-slate-900 hover:bg-white/60 active:bg-white/80;
+  }
+
+  .card {
+    @apply rounded-2xl border border-slate-200 bg-white shadow-sm;
+  }
+
+  .card-earth {
+    @apply rounded-2xl border shadow-sm;
+    background-color: rgb(194 162 107 / 0.12);
+    border-color: rgb(194 162 107 / 0.3);
+  }
+}
+
+@layer utilities {
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fadeUp {
+    animation: fadeUp 600ms ease-out forwards;
+  }
+}
 
 :root {
   font-family:

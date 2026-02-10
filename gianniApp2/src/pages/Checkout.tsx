@@ -77,7 +77,7 @@ export default function Checkout() {
         rightSlot={
           <button
             type="button"
-            className="top-nav__btn"
+            className="top-nav__btn btn-primary"
             onClick={() => navigate("/")}
           >
             Home
@@ -101,6 +101,7 @@ export default function Checkout() {
                 <div className="wallet-buttons">
                   {connectors.map((connector) => (
                     <button
+                      className="btn-primary"
                       key={connector.uid}
                       onClick={() => {
                         setSelectedConnectorUid(connector.uid);
@@ -152,11 +153,13 @@ export default function Checkout() {
               )}
 
               <div className="wallet-actions">
-                <button onClick={() => disconnect()}>Disconnetti</button>
+                <button className="btn-primary" onClick={() => disconnect()}>
+                  Disconnetti
+                </button>
 
                 {!isTxSuccess ? (
                   <button
-                    className="confirm-button"
+                    className="btn-primary confirm-button"
                     onClick={handleConfirmPurchase}
                     disabled={isTxPending || !hasEnoughBalance}
                   >
@@ -166,7 +169,7 @@ export default function Checkout() {
                   </button>
                 ) : (
                   <button
-                    className="confirm-button"
+                    className="btn-primary confirm-button"
                     type="button"
                     onClick={() => navigate("/")}
                   >

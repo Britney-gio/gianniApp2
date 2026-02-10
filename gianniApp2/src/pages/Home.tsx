@@ -90,30 +90,27 @@ export default function Home() {
             {/* TESTO */}
             <div className="p-6 md:p-8">
               <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 md:text-4xl">
-                Benvenuto nell'e-commerce innovativo di Gianni
+                Benvenuto
               </h1>
 
               <h2 className="mt-2 text-lg font-bold text-slate-800 md:text-xl">
-                Dalla terra di Sicilia alla blockchain Ethereum
+                Il market dalla terra di Sicilia alla blockchain Ethereum
               </h2>
 
               <p className="mt-4 leading-relaxed text-slate-700">
-                Gianni è un agricoltore siciliano che insieme alla sua famiglia
-                da generazioni coltiva la propria terra con passione e rispetto
-                per la natura. Oggi porta i suoi prodotti biologici e a km zero
-                nel mondo Web3, unendo tradizione e innovazione.
+                Gianni è un agricoltore siciliano che porta prodotti biologici e
+                a km zero nel mondo Web3, unendo tradizione e innovazione.
               </p>
 
               <p className="mt-3 leading-relaxed text-slate-700">
-                In questa piattaforma è possibile acquistare esclusivamente
-                tramite token su blockchain Ethereum, utilizzando ETH di prova
-                su rete test.
+                Qui puoi acquistare tramite token su blockchain Ethereum, usando
+                ETH di prova su rete test.
               </p>
 
               <div className="mt-6 flex flex-wrap items-center gap-3">
                 <button
                   type="button"
-                  className="rounded-xl bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-500 active:bg-emerald-700"
+                  className="btn-primary rounded-xl px-4 py-2 text-sm font-semibold text-white transition"
                   onClick={() => {
                     const el = document.getElementById("products");
                     el?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -121,13 +118,6 @@ export default function Home() {
                 >
                   Esplora i prodotti
                 </button>
-
-                <a
-                  className="rounded-xl border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-900 transition hover:bg-slate-50"
-                  href="#products"
-                >
-                  Vai alla gallery
-                </a>
               </div>
             </div>
           </div>
@@ -135,15 +125,15 @@ export default function Home() {
       </section>
 
       {/* COME FUNZIONA */}
-      <section className="features" aria-label="Come funziona">
+      <section className="features mt-2" aria-label="Come funziona">
         <h2 className="text-2xl font-bold tracking-tight text-slate-900">
-          Come funziona
+          Come funziona ?
         </h2>
 
-        <div className="features__grid">
-          <article className="feature-card">
+        <div className="mt-4 grid gap-4 md:grid-cols-3">
+          <article className="card-earth p-4 opacity-0 translate-y-2 animate-fadeUp">
             <h3 className="text-base font-bold text-slate-900">
-              1) Scegli il prodotto
+              Scegli il prodotto
             </h3>
             <p className="text-slate-700">
               Seleziona agrumi, frutta secca e specialità locali direttamente
@@ -151,9 +141,9 @@ export default function Home() {
             </p>
           </article>
 
-          <article className="feature-card">
+          <article className="card-earth p-4 opacity-0 translate-y-2 animate-fadeUp [animation-delay:250ms]">
             <h3 className="text-base font-bold text-slate-900">
-              2) Connetti il wallet
+              Connetti il wallet
             </h3>
             <p className="text-slate-700">
               Collega MetaMask e verifica il saldo su Sepolia prima
@@ -161,9 +151,9 @@ export default function Home() {
             </p>
           </article>
 
-          <article className="feature-card">
+          <article className="card-earth p-4 opacity-0 translate-y-2 animate-fadeUp [animation-delay:500ms]">
             <h3 className="text-base font-bold text-slate-900">
-              3) Paga in ETH (test)
+              Paga in ETH (test)
             </h3>
             <p className="text-slate-700">
               Confermi la transazione e puoi tracciare tutto su Etherscan in
@@ -173,46 +163,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PERCHE WEB3 */}
-      <section className="whyweb3" aria-label="Perché Web3">
-        <div className="whyweb3__content">
-          <h2 className="text-2xl font-bold tracking-tight text-slate-900">
-            Perché Web3?
-          </h2>
-
-          <p className="text-slate-700">
-            Questo progetto è una demo didattica: un checkout che simula un
-            acquisto “trasparente” grazie alla blockchain.
-          </p>
-
-          <ul className="text-slate-700">
-            <li>Tracciabilità pubblica della transazione</li>
-            <li>Wallet come identità dell’utente</li>
-            <li>Base solida per evoluzioni (token, loyalty, supply chain)</li>
-          </ul>
-
-          <div className="whyweb3__cta">
-            <button
-              type="button"
-              className="rounded-xl bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-500 active:bg-emerald-700"
-              onClick={() => navigate("/")}
-            >
-              Esplora i prodotti
-            </button>
-
-            <a
-              className="text-sm font-semibold text-slate-700 underline underline-offset-4 hover:text-slate-900 transition"
-              href="#products"
-            >
-              Vai alla gallery
-            </a>
-          </div>
-        </div>
-      </section>
-
       {/* ALERT BUTTON */}
       <button
-        className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 active:bg-slate-100"
+        className="btn-primary rounded-xl px-4 py-2 text-sm font-semibold text-white transition"
         type="button"
         onClick={() => setIsAlertOpen(true)}
       >
@@ -240,7 +193,7 @@ export default function Home() {
             <button
               type="button"
               onClick={() => setIsAlertOpen(false)}
-              className="rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800"
+              className="btn-primary rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800"
             >
               Chiudi
             </button>
@@ -260,57 +213,68 @@ export default function Home() {
           sua famiglia.
         </p>
 
-        <div className="carousel">
-          <button
-            className="arrow sx"
-            onClick={handlePrev}
-            type="button"
-            aria-label="Prodotti precedenti"
-            disabled={totalItems <= visibleItems}
-          >
-            ←
-          </button>
+        <div className="wide-section mt-4">
+          <div className="carousel-wide">
+            <div className="relative flex items-center justify-center py-2 px-14">
+              <button
+                className="btn-primary arrow sx"
+                onClick={handlePrev}
+                type="button"
+                aria-label="Prodotti precedenti"
+                disabled={totalItems <= visibleItems}
+              >
+                ←
+              </button>
 
-          <div className="carousel-viewport">
-            <ul className="product-list">
-              {visibleProducts.map((product) => (
-                <li key={product.id} className="product-card">
-                  <h3 className="text-lg font-bold text-slate-900">
-                    {product.name}
-                  </h3>
+              <div className="carousel-viewport">
+                <ul className="product-list">
+                  {visibleProducts.map((product) => (
+                    <li key={product.id} className="product-card">
+                      <h3 className="text-lg font-bold text-slate-900">
+                        {product.name}
+                      </h3>
 
-                  <p className="text-slate-700">{product.description}</p>
-                  <p className="text-slate-700">Origine: {product.origin}</p>
-                  <p className="text-slate-700">Quantità: {product.quantity}</p>
+                      <p className="text-slate-700">{product.description}</p>
+                      <p className="text-slate-700">
+                        Origine: {product.origin}
+                      </p>
+                      <p className="text-slate-700">
+                        Quantità: {product.quantity}
+                      </p>
 
-                  <p className="text-slate-900">
-                    <strong>Prezzo al kg:</strong> {product.price}
-                  </p>
+                      <p className="text-slate-900">
+                        <strong>Prezzo al kg:</strong> {product.price}
+                      </p>
 
-                  <img src={product.image} alt={product.name} />
+                      <img src={product.image} alt={product.name} />
 
-                  <button
-                    type="button"
-                    onClick={() =>
-                      navigate("/checkout", { state: { productItem: product } })
-                    }
-                  >
-                    Procedi all' acquisto
-                  </button>
-                </li>
-              ))}
-            </ul>
+                      <button
+                        className="btn-primary"
+                        type="button"
+                        onClick={() =>
+                          navigate("/checkout", {
+                            state: { productItem: product },
+                          })
+                        }
+                      >
+                        Procedi all' acquisto
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <button
+                className="btn-primary arrow dx"
+                onClick={handleNext}
+                type="button"
+                aria-label="Prodotti successivi"
+                disabled={totalItems <= visibleItems}
+              >
+                →
+              </button>
+            </div>
           </div>
-
-          <button
-            className="arrow dx"
-            onClick={handleNext}
-            type="button"
-            aria-label="Prodotti successivi"
-            disabled={totalItems <= visibleItems}
-          >
-            →
-          </button>
         </div>
       </section>
 
@@ -319,7 +283,9 @@ export default function Home() {
         <p className="text-slate-700">
           Grazie per aver scelto un'agricoltura sostenibile e trasparente.
         </p>
-        <p className="text-slate-700">Lo staff dell'azienda agricola di Gianni</p>
+        <p className="text-slate-700">
+          Lo staff dell'azienda agricola di Gianni
+        </p>
 
         <img
           src="/img-footer.jpg"

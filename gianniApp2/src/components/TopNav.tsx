@@ -46,7 +46,7 @@ export default function TopNav({ rightSlot }: TopNavProps) {
                 type="button"
                 onClick={() => disconnect()}
                 aria-label="Disconnetti wallet"
-                className="rounded-xl bg-white/10 px-3 py-2 text-xs sm:text-sm font-semibold text-white hover:bg-white/15 transition"
+                className="rounded-xl bg-white/10 px-3 py-2 text-xs sm:text-sm font-semibold text-white hover:bg-white/15 transition btn-primary"
               >
                 Disconnetti
               </button>
