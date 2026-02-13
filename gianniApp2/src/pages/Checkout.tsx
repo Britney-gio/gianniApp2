@@ -152,8 +152,7 @@ export default function Checkout() {
               <p className="address p-2">{address}</p>
 
               <p>
-                <strong cl>Saldo:</strong>{" "}
-                {isBalanceLoading && "Caricamento..."}
+                <strong>Saldo:</strong> {isBalanceLoading && "Caricamento..."}
                 {!isBalanceLoading && formattedBalance && (
                   <>
                     {formattedBalance} {balanceData?.symbol}
