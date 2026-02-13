@@ -73,7 +73,6 @@ export default function Home() {
       <section className="mt-10 pt-20">
         <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
           <div className="grid gap-0 md:grid-cols-[1.2fr_1fr]">
-            {/* IMMAGINE */}
             <div className="relative">
               <img
                 src="/img-footer.jpg"
@@ -87,7 +86,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* TESTO */}
             <div className="p-6 md:p-8">
               <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 md:text-4xl">
                 Benvenuto
@@ -172,7 +170,6 @@ export default function Home() {
         Perchè questa scelta?
       </button>
 
-      {/* ALERT MODAL */}
       {isAlertOpen && (
         <div
           className="alert-overlay"

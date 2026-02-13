@@ -2,7 +2,7 @@ import { useLocation, Navigate, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import type { Product } from "../types/product";
 import TopNav from "../components/TopNav";
-import "../styles/home.scss";
+import "../styles/checkout.scss";
 
 import {
   useAccount,
@@ -85,15 +85,14 @@ export default function Checkout() {
         }
       />
 
-      <header className="hero mt-10 ">
+      <header className="hero mt-20">
         <h1>Checkout</h1>
         <p>Rivedi i dettagli e conferma il tuo ordine.</p>
       </header>
 
       <div className="checkout-wrapper">
-        <section className="checkout-layout">
-          {/* COLONNA SINISTRA — PRODOTTO */}
-          <div className="checkout-left product-card">
+        <section className="checkout-layout ">
+          <div className="checkout-left p-8">
             {!isConnected && (
               <div className="wallet-box">
                 <p>Collega il wallet per procedere all’acquisto</p>
@@ -119,25 +118,42 @@ export default function Checkout() {
               </div>
             )}
 
-            <img src={productItem.image} alt={productItem.name} />
-            <h2>{productItem.name}</h2>
-            <p>{productItem.description}</p>
-            <p>Origine: {productItem.origin}</p>
-            <p>Quantità: {productItem.quantity}</p>
-            <p>
-              <strong>Prezzo al kg:</strong> {PRICE_ETH} ETH
-            </p>
+            <div className="checkout-product">
+              <div className="checkout-product__media">
+                <img src={productItem.image} alt={productItem.name} />
+              </div>
+
+              <div className="checkout-product__content">
+                <h2 className="checkout-product__title">{productItem.name}</h2>
+
+                <p className="checkout-product__desc">
+                  {productItem.description}
+                </p>
+
+                <div className="checkout-product__rows">
+                  <p>
+                    <strong>Origine:</strong> {productItem.origin}
+                  </p>
+                  <p>
+                    <strong>Quantità:</strong> {productItem.quantity}
+                  </p>
+                  <p>
+                    <strong>Prezzo:</strong> {PRICE_ETH} ETH
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
 
-          {/* COLONNA DESTRA — WALLET */}
           {isConnected && (
-            <aside className="checkout-right wallet-info">
+            <aside className="checkout-right wallet-info p-8 mb-8">
               <h3>Wallet connesso</h3>
 
-              <p className="address">{address}</p>
+              <p className="address p-2">{address}</p>
 
               <p>
-                <strong>Saldo:</strong> {isBalanceLoading && "Caricamento..."}
+                <strong cl>Saldo:</strong>{" "}
+                {isBalanceLoading && "Caricamento..."}
                 {!isBalanceLoading && formattedBalance && (
                   <>
                     {formattedBalance} {balanceData?.symbol}
@@ -153,7 +169,10 @@ export default function Checkout() {
               )}
 
               <div className="wallet-actions">
-                <button className="btn-primary" onClick={() => disconnect()}>
+                <button
+                  className="btn-primary mb-3 mt-3 mr-3 "
+                  onClick={() => disconnect()}
+                >
                   Disconnetti
                 </button>
 
@@ -204,7 +223,7 @@ export default function Checkout() {
         </section>
       </div>
 
-      <footer className="footer">
+      <footer className="footer mt-20">
         <p>Grazie per aver scelto un'agricoltura sostenibile e trasparente.</p>
         <p>Lo staff dell'azienda agricola di Gianni</p>
       </footer>

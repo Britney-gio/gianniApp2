@@ -1,0 +1,37 @@
+@import "./variabili";
+.page {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 680px;
+  padding: 2rem 1.25rem 3rem;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+.hero {
+  margin-top: 2.5rem;
+  padding-top: 1.25rem;
+}
+
+.hero h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.hero p {
+  margin-top: 0.5rem;
+  color: rgba(15, 23, 42, 0.75);
+  line-height: 1.5;
+}
+
+.checkout-wrapper {
+  margin-top: 1.25rem;
+}
+
+.checkout-layout {
+  display: grid;
+  gap: 16px;
+}
+
