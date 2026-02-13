@@ -17,7 +17,7 @@ export default function Home() {
   const [isAlertOpen, setIsAlertOpen] = useState(false);
 
   const alertMessage: string =
-    "Questa scelta non rappresenta solo un'innovazione tecnologica, ma anche una scelta ecologica. I token ERC-20 costituiscono un metodo digamento a basso impatto ambientale, poiché non richiedono la stampa di denaro fisico e riducono le emissioni legate alla sua produzione e gestione.";
+    "Questa scelta non rappresenta solo un'innovazione tecnologica, ma anche una scelta ecologica. Usare token ERC-20 significa scegliere un sistema digitale più sostenibile, riducendo l’uso di denaro fisico e i relativi sprechi..";
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleItems, setVisibleItems] = useState(getVisibleItems());
@@ -215,9 +215,9 @@ export default function Home() {
 
         <div className="wide-section mt-4">
           <div className="carousel-wide">
-            <div className="relative flex items-center justify-center py-2 px-14">
+            <div className="carousel-wrapper">
               <button
-                className="btn-primary arrow sx"
+                className="arrow sx"
                 onClick={handlePrev}
                 type="button"
                 aria-label="Prodotti precedenti"
@@ -234,10 +234,10 @@ export default function Home() {
                         {product.name}
                       </h3>
 
-                      <p className="text-slate-700">{product.description}</p>
                       <p className="text-slate-700">
                         Origine: {product.origin}
                       </p>
+
                       <p className="text-slate-700">
                         Quantità: {product.quantity}
                       </p>
@@ -257,7 +257,7 @@ export default function Home() {
                           })
                         }
                       >
-                        Procedi all' acquisto
+                        Procedi all&apos; acquisto
                       </button>
                     </li>
                   ))}
@@ -265,7 +265,7 @@ export default function Home() {
               </div>
 
               <button
-                className="btn-primary arrow dx"
+                className="arrow dx"
                 onClick={handleNext}
                 type="button"
                 aria-label="Prodotti successivi"

@@ -64,16 +64,6 @@
     font-size: 2rem;
   }
 
-  .carousel-arrow.left,
-  .arrow.sx {
-    left: -64px;
-  }
-
-  .carousel-arrow.right,
-  .arrow.dx {
-    right: -64px;
-  }
-
   .product-list {
     gap: 2rem;
   }
@@ -134,5 +124,23 @@
 @media (min-width: 1024px) {
   .product-list {
     gap: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .arrow.sx {
+    left: 10px;
+  }
+  .arrow.dx {
+    right: 10px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .arrow.sx {
+    left: 12px;
+  }
+  .arrow.dx {
+    right: 12px;
   }
 }
