@@ -2,6 +2,8 @@ import type { ReactNode } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAccount, useDisconnect } from "wagmi";
 
+// Componente per la barra di navigazione superiore fissa uguale per tutte le Route.
+
 type TopNavProps = {
   rightSlot?: ReactNode;
 };

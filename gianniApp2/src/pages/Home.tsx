@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import TopNav from "../components/TopNav";
 import "../styles/home.scss";
 
+// Funzione per determinare quanti prodotti mostrare in base alla larghezza della finestra
 function getVisibleItems() {
   if (typeof window === "undefined") return 3;
   if (window.innerWidth < 768) return 1;
@@ -14,23 +15,27 @@ function getVisibleItems() {
 export default function Home() {
   const navigate = useNavigate();
 
+  // Stato per gestire la visibilità dell'alert informativo
   const [isAlertOpen, setIsAlertOpen] = useState(false);
 
   const alertMessage: string =
     "Questa scelta non rappresenta solo un'innovazione tecnologica, ma anche una scelta ecologica. Usare token ERC-20 significa scegliere un sistema digitale più sostenibile, riducendo l’uso di denaro fisico e i relativi sprechi..";
 
+  // Stati per gestire il carosello dei prodotti
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleItems, setVisibleItems] = useState(getVisibleItems());
 
   const totalItems = productList.length;
   const lastStartIndex = Math.max(0, totalItems - visibleItems);
 
+  // Aggiorna il numero di card visibili quando cambia la larghezza dello schermo
   useEffect(() => {
     const onResize = () => setVisibleItems(getVisibleItems());
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
+  // Assicura che l'indice corrente sia sempre valido quando cambia il numero di card visibili o il totale dei prodotti
   useEffect(() => {
     if (totalItems === 0) return;
     setCurrentIndex((prev) => Math.min(prev, lastStartIndex));
@@ -54,6 +59,7 @@ export default function Home() {
     });
   };
 
+  // Genera l'array di prodotti da mostrare nel carosello (effetto "loop infinito")
   const visibleProducts = useMemo(() => {
     if (totalItems === 0) return [];
     const count = Math.min(visibleItems, totalItems);
@@ -122,7 +128,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* COME FUNZIONA */}
+      {/* SEZIONE COME FUNZIONA */}
       <section className="features mt-2" aria-label="Come funziona">
         <h2 className="text-2xl font-bold tracking-tight text-slate-900">
           Come funziona ?
@@ -161,7 +167,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ALERT BUTTON */}
+      {/* ALERT BUTTON INFORMATIVO */}
       <button
         className="btn-primary rounded-xl px-4 py-2 text-sm font-semibold text-white transition"
         type="button"
@@ -245,6 +251,7 @@ export default function Home() {
 
                       <img src={product.image} alt={product.name} />
 
+                      {/* Il pulsante "Procedi all'acquisto" passa l'oggetto del prodotto alla pagina di checkout tramite lo stato di navigazione */}
                       <button
                         className="btn-primary"
                         type="button"

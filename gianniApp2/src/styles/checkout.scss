@@ -1,4 +1,4 @@
-
+@use "./variabili" as *;
 
 .hero {
   margin-top: 2.5rem;
@@ -38,7 +38,7 @@
 .checkout-right {
   border-radius: 18px;
   border: 1px solid rgba(0, 0, 0, 0.08);
-  background: #ffffff;
+  background: $bianco;
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
 }
 
@@ -170,7 +170,6 @@
   text-decoration: underline;
 }
 
-/* Super small screens */
 @media (max-width: 425px) {
   .checkout-layout {
     gap: 12px;

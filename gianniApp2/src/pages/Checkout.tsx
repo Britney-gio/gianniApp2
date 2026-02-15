@@ -28,10 +28,11 @@ export default function Checkout() {
     string | null
   >(null);
 
-  // PRODOTTO SCELTO
+  // Recupero prodotto selezionato dalla Home tramite router state
+
   const productItem = location.state?.productItem as Product | undefined;
 
-  // BALANCE WALLET CONNESSO
+  // Recupero saldo del wallet connesso (Sepolia)
   const { data: balanceData, isLoading: isBalanceLoading } = useBalance({
     address,
     query: { enabled: Boolean(isConnected && address) },
@@ -41,10 +42,11 @@ export default function Checkout() {
     ? formatUnits(balanceData.value, balanceData.decimals)
     : null;
 
+  // Verifica se l'utente ha abbastanza ETH per completare l'acquisto
   const hasEnoughBalance =
     formattedBalance && Number(formattedBalance) >= Number(PRICE_ETH);
 
-  // TRANSAZIONE
+  // Hook wagmi per inviare la transazione di acquisto vs il wallet di Gianni
   const {
     sendTransaction,
     data: txDataHash,
@@ -57,6 +59,7 @@ export default function Checkout() {
     ? `https://sepolia.etherscan.io/tx/${txDataHash}`
     : null;
 
+  // Funzione per gestire la conferma dell'acquisto e inviare la transazione
   const handleConfirmPurchase = () => {
     if (!address) return;
     if (isTxPending || isTxSuccess) return;
@@ -67,6 +70,7 @@ export default function Checkout() {
     });
   };
 
+  // Se non c'è un prodotto selezionato, reindirizza alla Home
   if (!productItem) {
     return <Navigate to="/" replace />;
   }
@@ -145,6 +149,8 @@ export default function Checkout() {
             </div>
           </div>
 
+          {/* Se il wallet è connesso, mostra le info del wallet e le azioni per confermare l'acquisto o disconnettersi */}
+          {/* Se wallet NON connesso: mostra pulsanti per connettere MetaMask / WalletConnect */}
           {isConnected && (
             <aside className="checkout-right wallet-info p-8 mb-8">
               <h3>Wallet connesso</h3>

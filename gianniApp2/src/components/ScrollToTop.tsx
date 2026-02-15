@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
+// Forza lo scroll in alto ad ogni cambio pagina
+
 export default function ScrollToTop() {
   const { pathname } = useLocation();
 
