@@ -5,7 +5,6 @@ import App from "./App";
 
 import "./index.css";
 import "./styles/_base.scss";
-import "./styles/media-query.scss";
 
 import { WagmiProvider } from "wagmi";
 import { config } from "./wagmi";

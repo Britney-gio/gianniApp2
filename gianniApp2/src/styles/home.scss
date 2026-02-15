@@ -75,17 +75,6 @@
   flex-wrap: wrap;
 }
 
-.carousel {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 0.5rem 0;
-  padding-left: 60px;
-  padding-right: 60px;
-}
-
 .carousel-viewport {
   width: 100%;
   overflow: hidden;
@@ -101,46 +90,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.carousel-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-
-  background: $verde-oliva;
-  border: none;
-  border-radius: 999px;
-
-  width: 44px;
-  height: 44px;
-  padding: 0;
-
-  cursor: pointer;
-  font-size: 1.3rem;
-  color: $bianco;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  z-index: 5;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
-
-  transition:
-    transform 0.2s ease,
-    opacity 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.carousel-arrow:hover {
-  transform: translateY(-50%) scale(1.08);
-}
-
-.carousel-arrow:disabled {
-  opacity: 0.35;
-  cursor: not-allowed;
-  transform: translateY(-50%);
 }
 
 .arrow {
@@ -180,6 +129,14 @@
   opacity: 0.35;
   cursor: not-allowed;
   transform: translateY(-50%);
+}
+
+.arrow.sx {
+  left: 8px;
+}
+
+.arrow.dx {
+  right: 8px;
 }
 
 .product-list {
@@ -303,5 +260,72 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+
+@media (min-width: 768px) {
+  .product-list {
+    gap: 1.5rem;
+  }
+
+  .product-card {
+    flex: 0 0 48%;
+    max-width: 48%;
+  }
+
+  .arrow {
+    width: 46px;
+    height: 46px;
+    font-size: 1.75rem;
+  }
+
+  .arrow.sx {
+    left: 10px;
+  }
+
+  .arrow.dx {
+    right: 10px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .product-list {
+    gap: 1.5rem;
+  }
+
+  .product-card {
+    flex: 0 0 32%;
+    max-width: 32%;
+  }
+
+  .arrow {
+    width: 52px;
+    height: 52px;
+    font-size: 2rem;
+  }
+
+  .arrow.sx {
+    left: 12px;
+  }
+
+  .arrow.dx {
+    right: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .arrow {
+    width: 38px;
+    height: 38px;
+    font-size: 1.1rem;
+  }
+
+  .arrow.sx {
+    left: 6px;
+  }
+
+  .arrow.dx {
+    right: 6px;
   }
 }
